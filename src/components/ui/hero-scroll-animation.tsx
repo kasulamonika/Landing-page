@@ -65,7 +65,7 @@ const Section2: React.FC<SectionProps> = ({ scrollYProgress }) => {
   );
 };
 
-const Component = forwardRef<HTMLElement>((props, ref) => {
+const Component = forwardRef<HTMLElement>((ref) => {
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: container,
