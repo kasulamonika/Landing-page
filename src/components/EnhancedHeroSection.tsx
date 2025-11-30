@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 
 interface Ripple {
-  id: number;
+  id: string;
   x: number;
   y: number;
 }
@@ -57,7 +57,7 @@ const EnhancedHeroSection = () => {
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      const newRipple: Ripple = { id: Date.now(), x: e.clientX, y: e.clientY };
+      const newRipple: Ripple = { id: crypto.randomUUID(), x: e.clientX, y: e.clientY };
       setRipples(prev => [...prev, newRipple]);
       setTimeout(() => setRipples(prev => prev.filter(r => r.id !== newRipple.id)), 1000);
     };
