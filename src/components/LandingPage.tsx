@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useScroll, useTransform, motion, MotionValue } from 'motion/react';
 import { useRef } from 'react';
+import EnhancedHeroSection from './EnhancedHeroSection';
 
 interface SectionProps {
   scrollYProgress: MotionValue<number>;
@@ -47,35 +48,85 @@ const AnimatedHeroSection: React.FC<SectionProps> = ({ scrollYProgress }) => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl group/title">
             Your Future Starts with
-            <span className="block mt-2 bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(to right, var(--blue10), white)' }}>
+            <span 
+              className="block mt-2 transition-all duration-300 cursor-pointer" 
+              style={{ 
+                backgroundImage: 'linear-gradient(to right, var(--blue10), white)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                filter: 'drop-shadow(0 0 25px rgba(165, 212, 245, 1))',
+                textShadow: '0 0 30px rgba(165, 212, 245, 0.8)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 35px rgba(165, 212, 245, 1.2))';
+                e.currentTarget.style.transform = 'scale(1.05)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(165, 212, 245, 1))';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            >
               Smart Career Decisions
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto" style={{ color: 'rgba(165, 212, 245, 0.9)' }}>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto transition-all duration-300 hover:text-white" style={{ color: 'rgba(165, 212, 245, 0.9)' }}>
             CareerG1 combines AI assessments, personalized recommendations, learning pathways, 
             and mentorship to help you make informed, data-backed career choices.
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12">
-            <div className="rounded-lg p-4 border hover:shadow-lg hover:-translate-y-1 transition-all duration-300" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(165, 212, 245, 0.2)', backdropFilter: 'blur(4px)' }}>
-              <div className="text-3xl">250M+</div>
+            <motion.div 
+              className="rounded-lg p-4 border transition-all duration-300 cursor-pointer group/card" 
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(165, 212, 245, 0.2)', backdropFilter: 'blur(4px)' }}
+              whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(165, 212, 245, 0.3)' }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: false }}
+            >
+              <div className="text-3xl font-bold group-hover/card:text-white transition-colors">250M+</div>
               <div className="text-sm" style={{ color: 'rgba(165, 212, 245, 0.8)' }}>School Students</div>
-            </div>
-            <div className="rounded-lg p-4 border hover:shadow-lg hover:-translate-y-1 transition-all duration-300" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(165, 212, 245, 0.2)', backdropFilter: 'blur(4px)' }}>
-              <div className="text-3xl">40M+</div>
+            </motion.div>
+            <motion.div 
+              className="rounded-lg p-4 border transition-all duration-300 cursor-pointer group/card" 
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(165, 212, 245, 0.2)', backdropFilter: 'blur(4px)' }}
+              whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(165, 212, 245, 0.3)' }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: false }}
+            >
+              <div className="text-3xl font-bold group-hover/card:text-white transition-colors">40M+</div>
               <div className="text-sm" style={{ color: 'rgba(165, 212, 245, 0.8)' }}>College Students</div>
-            </div>
-            <div className="rounded-lg p-4 border hover:shadow-lg hover:-translate-y-1 transition-all duration-300" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(165, 212, 245, 0.2)', backdropFilter: 'blur(4px)' }}>
-              <div className="text-3xl">12M</div>
+            </motion.div>
+            <motion.div 
+              className="rounded-lg p-4 border transition-all duration-300 cursor-pointer group/card" 
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(165, 212, 245, 0.2)', backdropFilter: 'blur(4px)' }}
+              whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(165, 212, 245, 0.3)' }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: false }}
+            >
+              <div className="text-3xl font-bold group-hover/card:text-white transition-colors">12M</div>
               <div className="text-sm" style={{ color: 'rgba(165, 212, 245, 0.8)' }}>Graduates/Year</div>
-            </div>
-            <div className="rounded-lg p-4 border hover:shadow-lg hover:-translate-y-1 transition-all duration-300" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(165, 212, 245, 0.2)', backdropFilter: 'blur(4px)' }}>
-              <div className="text-3xl">70%</div>
+            </motion.div>
+            <motion.div 
+              className="rounded-lg p-4 border transition-all duration-300 cursor-pointer group/card" 
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(165, 212, 245, 0.2)', backdropFilter: 'blur(4px)' }}
+              whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(165, 212, 245, 0.3)' }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: false }}
+            >
+              <div className="text-3xl font-bold group-hover/card:text-white transition-colors">70%</div>
               <div className="text-sm" style={{ color: 'rgba(165, 212, 245, 0.8)' }}>Lack Guidance</div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -94,8 +145,8 @@ export function LandingPage() {
     <div ref={container} className="relative w-full">
       <Navbar />
       
-      {/* Animated Hero Section */}
-      <AnimatedHeroSection scrollYProgress={scrollYProgress} />
+      {/* Enhanced Animated Hero Section with Digital Serenity Effects */}
+      <EnhancedHeroSection />
       
       {/* Regular sections below */}
       <div className="w-full" style={{ backgroundImage: 'linear-gradient(to bottom right, var(--blue10), white)' }}>
@@ -147,7 +198,7 @@ export function LandingPage() {
 
             <div className="rounded-lg p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-slide-in-left" style={{ backgroundColor: 'rgba(165, 212, 245, 0.4)', borderColor: 'rgba(28, 130, 180, 0.3)', borderWidth: '2px' }}>
               <div className="flex items-start gap-4">
-                <AlertCircle className="w-8 h-8 flex-shrink-0 mt-1\" style={{ color: 'var(--blue4)' }} />
+                <AlertCircle className="w-8 h-8 flex-shrink-0 mt-1" style={{ color: 'var(--blue4)' }} />
                 <div>
                   <h3 className="text-xl mb-2" style={{ color: 'var(--blue4)' }}>No AI-Driven Recommendations</h3>
                   <p className="text-gray-700">
@@ -301,7 +352,7 @@ export function LandingPage() {
               </div>
               <h3 className="text-xl mb-3" style={{ color: 'var(--blue4)' }}>Dynamic Learning Pathways</h3>
               <p className="text-gray-600">
-                Personalized roadmaps with curated course recommendations, and skill building 
+                Personalized roadmaps with curated course recommendations, and skill-building 
                 activities that adapt to your progress and goals.
               </p>
             </div>
