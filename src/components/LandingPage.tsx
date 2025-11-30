@@ -1,5 +1,4 @@
 import { Navbar } from './Navbar';
-import { Button } from './ui/button';
 import { 
   Brain, 
   Target, 
@@ -15,134 +14,14 @@ import {
   Rocket,
   Shield,
   Zap,
-  Globe,
-  ChevronRight,
-  Sparkles
+  Globe
 } from 'lucide-react';
-import { useScroll, useTransform, motion, MotionValue } from 'motion/react';
-import { useRef } from 'react';
+import { motion } from 'motion/react';
 import EnhancedHeroSection from './EnhancedHeroSection';
 
-interface SectionProps {
-  scrollYProgress: MotionValue<number>;
-}
-
-const AnimatedHeroSection: React.FC<SectionProps> = ({ scrollYProgress }) => {
-  const scale = useTransform(scrollYProgress, [0, 0.15], [1, 0.9]);
-  const opacity = useTransform(scrollYProgress, [0, 0.15], [1, 0.7]);
-
-  return (
-    <motion.section
-      style={{ scale, opacity }}
-      className="relative overflow-hidden text-white w-full min-h-screen flex items-center justify-center"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
-      <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(to bottom right, var(--blue4), var(--blue2))' }}></div>
-      
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'var(--blue10)' }}></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'var(--blue10)' }}></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl group/title">
-            Your Future Starts with
-            <span 
-              className="block mt-2 transition-all duration-300 cursor-pointer" 
-              style={{ 
-                backgroundImage: 'linear-gradient(to right, var(--blue10), white)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                filter: 'drop-shadow(0 0 25px rgba(165, 212, 245, 1))',
-                textShadow: '0 0 30px rgba(165, 212, 245, 0.8)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 35px rgba(165, 212, 245, 1.2))';
-                e.currentTarget.style.transform = 'scale(1.05)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(165, 212, 245, 1))';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-            >
-              Smart Career Decisions
-            </span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto transition-all duration-300 hover:text-white" style={{ color: 'rgba(165, 212, 245, 0.9)' }}>
-            CareerG1 combines AI assessments, personalized recommendations, learning pathways, 
-            and mentorship to help you make informed, data-backed career choices.
-          </p>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12">
-            <motion.div 
-              className="rounded-lg p-4 border transition-all duration-300 cursor-pointer group/card" 
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(165, 212, 245, 0.2)', backdropFilter: 'blur(4px)' }}
-              whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(165, 212, 245, 0.3)' }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: false }}
-            >
-              <div className="text-3xl font-bold group-hover/card:text-white transition-colors">250M+</div>
-              <div className="text-sm" style={{ color: 'rgba(165, 212, 245, 0.8)' }}>School Students</div>
-            </motion.div>
-            <motion.div 
-              className="rounded-lg p-4 border transition-all duration-300 cursor-pointer group/card" 
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(165, 212, 245, 0.2)', backdropFilter: 'blur(4px)' }}
-              whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(165, 212, 245, 0.3)' }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: false }}
-            >
-              <div className="text-3xl font-bold group-hover/card:text-white transition-colors">40M+</div>
-              <div className="text-sm" style={{ color: 'rgba(165, 212, 245, 0.8)' }}>College Students</div>
-            </motion.div>
-            <motion.div 
-              className="rounded-lg p-4 border transition-all duration-300 cursor-pointer group/card" 
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(165, 212, 245, 0.2)', backdropFilter: 'blur(4px)' }}
-              whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(165, 212, 245, 0.3)' }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: false }}
-            >
-              <div className="text-3xl font-bold group-hover/card:text-white transition-colors">12M</div>
-              <div className="text-sm" style={{ color: 'rgba(165, 212, 245, 0.8)' }}>Graduates/Year</div>
-            </motion.div>
-            <motion.div 
-              className="rounded-lg p-4 border transition-all duration-300 cursor-pointer group/card" 
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(165, 212, 245, 0.2)', backdropFilter: 'blur(4px)' }}
-              whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(165, 212, 245, 0.3)' }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: false }}
-            >
-              <div className="text-3xl font-bold group-hover/card:text-white transition-colors">70%</div>
-              <div className="text-sm" style={{ color: 'rgba(165, 212, 245, 0.8)' }}>Lack Guidance</div>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    </motion.section>
-  );
-};
-
 export function LandingPage() {
-  const container = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ['start start', 'end center'],
-  });
-
   return (
-    <div ref={container} className="relative w-full">
+    <div className="relative w-full">
       <Navbar />
       
       {/* Enhanced Animated Hero Section with Digital Serenity Effects */}
@@ -239,7 +118,7 @@ export function LandingPage() {
             <div className="text-center mb-16 animate-fade-in-up">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4" style={{ backgroundColor: 'var(--blue4)', color: 'var(--blue10)' }}>
                 <Lightbulb className="w-4 h-4" />
-                <span className="text-sm">The Solution ?</span>
+                <span className="text-sm">The Solution?</span>
               </div>
               <h2 className="text-3xl md:text-5xl mb-4" style={{ color: 'var(--blue4)' }}>
                 CareerG1. One Platform, Complete Journey

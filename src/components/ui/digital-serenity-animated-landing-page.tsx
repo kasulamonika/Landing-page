@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+interface Ripple {
+  id: string;
+  x: number;
+  y: number;
+}
+
 const DigitalSerenity = () => {
   const [mouseGradientStyle, setMouseGradientStyle] = useState({
     left: '0px',
     top: '0px',
     opacity: 0,
   });
-  const [ripples, setRipples] = useState([]);
+  const [ripples, setRipples] = useState<Ripple[]>([]);
   const [scrolled, setScrolled] = useState(false);
-  const wordsRef = useRef([]); // Not strictly necessary if not directly manipulating post-initial animation
-  const floatingElementsRef = useRef([]);
+  const floatingElementsRef = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
     const animateWords = () => {
@@ -26,7 +31,7 @@ const DigitalSerenity = () => {
   }, []);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setMouseGradientStyle({
         left: `${e.clientX}px`,
         top: `${e.clientY}px`,
@@ -45,8 +50,8 @@ const DigitalSerenity = () => {
   }, []);
 
   useEffect(() => {
-    const handleClick = (e) => {
-      const newRipple = { id: Date.now(), x: e.clientX, y: e.clientY };
+    const handleClick = (e: MouseEvent) => {
+      const newRipple: Ripple = { id: crypto.randomUUID(), x: e.clientX, y: e.clientY };
       setRipples(prev => [...prev, newRipple]);
       setTimeout(() => setRipples(prev => prev.filter(r => r.id !== newRipple.id)), 1000);
     };
@@ -56,8 +61,14 @@ const DigitalSerenity = () => {
   
   useEffect(() => {
     const wordElements = document.querySelectorAll('.word-animate');
-    const handleMouseEnter = (e) => { if (e.target) e.target.style.textShadow = '0 0 20px rgba(203, 213, 225, 0.5)'; };
-    const handleMouseLeave = (e) => { if (e.target) e.target.style.textShadow = 'none'; };
+    const handleMouseEnter = (e: Event) => { 
+      const target = e.target as HTMLElement;
+      if (target) target.style.textShadow = '0 0 20px rgba(203, 213, 225, 0.5)'; 
+    };
+    const handleMouseLeave = (e: Event) => { 
+      const target = e.target as HTMLElement;
+      if (target) target.style.textShadow = 'none'; 
+    };
     wordElements.forEach(word => {
       word.addEventListener('mouseenter', handleMouseEnter);
       word.addEventListener('mouseleave', handleMouseLeave);
