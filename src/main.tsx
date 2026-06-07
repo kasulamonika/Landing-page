@@ -4,5 +4,11 @@
   import "./index.css";
   import "./styles/globals.css";
 
+  pendo.initialize({
+    visitor: {
+      id: ''
+    }
+  });
+
   createRoot(document.getElementById("root")!).render(<App />);
   
