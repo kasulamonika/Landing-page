@@ -1,13 +1,13 @@
 import { Navbar } from './Navbar';
 import { Button } from './ui/button';
-import { 
-  Brain, 
-  Target, 
-  Users, 
-  BarChart, 
-  GraduationCap, 
-  Award, 
-  BookOpen, 
+import {
+  Brain,
+  Target,
+  Users,
+  BarChart,
+  GraduationCap,
+  Award,
+  BookOpen,
   TrendingUp,
   CheckCircle,
   AlertCircle,
@@ -22,6 +22,7 @@ import {
 import { useScroll, useTransform, motion, MotionValue } from 'motion/react';
 import { useRef } from 'react';
 import EnhancedHeroSection from './EnhancedHeroSection';
+import { trackCtaGetStartedClicked } from '../lib/pendoTracking';
 
 interface SectionProps {
   scrollYProgress: MotionValue<number>;
@@ -688,8 +689,24 @@ export function LandingPage() {
               </p>
             </div>
 
-            
-            <div className="pt-8 flex items-center justify-center gap-8 text-sm" style={{ color: 'rgba(165, 212, 245, 0.8)' }}>
+            <div className="pt-4">
+              <Button
+                size="lg"
+                className="text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                style={{ backgroundColor: 'var(--blue10)', color: 'var(--blue4)' }}
+                onClick={() => {
+                  trackCtaGetStartedClicked({
+                    referral_source: document.referrer || 'direct',
+                    landing_page_variant: 'default',
+                  });
+                }}
+              >
+                Get Started
+                <ChevronRight className="w-5 h-5 ml-2" />
+              </Button>
+            </div>
+
+            <div className="pt-4 flex items-center justify-center gap-8 text-sm" style={{ color: 'rgba(165, 212, 245, 0.8)' }}>
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4" />
                 <span>No credit card required</span>
